@@ -23,12 +23,22 @@ function getRepositoryList(searchTerm) {
 }
 
 function loopingThroughData(data){
-  let resultContainer = document.getElementById("list-container")
+  var template, clone;
 
-  for(var i = 0; i<30; i++){
-    let li = document.createElement("li")
-    li.innerText = data.items[i].name
-    resultContainer.appendChild(li)
+  template = document.querySelector('#card-template');
+
+  for(var i = 0; i<10; i++){
+
+    clone = template.content.cloneNode(true);
+    clone.getElementById("name").textContent = data.items[i].name;
+    clone.getElementById("description").textContent = data.items[i].description;
+    clone.getElementById("author").textContent = data.items[i].owner.login;
+    clone.getElementById("language").textContent = data.items[i].languages_url;
+    clone.getElementById("forks").textContent = data.items[i].forks_count;
+    clone.getElementById("stars").textContent = data.items[i].stargazers_count;
+    clone.getElementById("date").textContent = data.items[i].updated_at;
+
+    document.body.appendChild(clone);
   }
   
 }
