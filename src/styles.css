@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap'); /*import da fonte que eu escolhi*/
+#card{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    border-bottom: 2px solid #919191;
+    padding: 2% 2% 2% 4%;
+    margin:2% 2% 0%; /*cima, dir e esq, baixo*/
+    font-family: 'Roboto', sans-serif;
+}
+#flex-col-um{
+    width: 90%;
+}

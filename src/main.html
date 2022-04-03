@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="./styles.css">
+        <title>Desafio - Destaque</title>
+    </head>
+    <body>
+        <!---->
+        <div class="form-container">
+            <form id="form">
+                <div class="form-group">
+                    <input type="text" id="searchTerm"/>
+                    <button class="btn">Pesquisar Repositórios</button>
+                </div>
+            </form>
+        </div>
+
+        <template id= "card-template">
+            <div id="card">
+                <div id="flex-col-um">
+                    <h3 id="name">Nome: </h3>
+                    <p id="description">Descrição: </p>
+                    <p id="author">Autor: </p>
+                    <p id="language">Linguagens: </p>
+                    <p id="forks">Forks: </p>
+                    <p id="date">Última atualização: </p>
+                </div>
+                <div id="flex-col-dois">
+                    <p id="stars">&#11088 : </p>
+                </div>
+            </div>
+            
+        </template>
+
+        <div id="results">
+
+        </div>
+    </body>
+    
+    <script src="./api-call.js"></script>
+</html>
