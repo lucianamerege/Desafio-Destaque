@@ -10,11 +10,30 @@
         <div class="form-container">
             <form id="form">
                 <div class="form-group">
-                    <input type="text" id="searchTerm" placeholder="Brasil">
-                    <button class="btn">Pesquisar Repositórios</button>
+                    <input type="text" id="searchTerm" placeholder="Brasil" required>
+                    <button class="input-btn">Pesquisar Repositórios</button>
                 </div>
             </form>
         </div>
+
+        <!--Área em que os elementos da paginação serão adicionados-->
+        <div id="area-paginacao">
+
+        </div>
+
+        <!--Área em que os cards de resultado serão adicionados-->
+        <div id="card-holder">
+
+        </div>
+
+
+        <!--Template de Paginação-->
+        <template id="pagina-template">
+            <div id = "paginacao">
+                <h2 id="quantidade">Resultados da busca: </h2>
+                <button></button>
+            </div>
+        </template>
 
         <!--Template para os resultados da pesquisa-->
         <template id= "card-template">
@@ -23,9 +42,12 @@
                     <h3 id="name">Nome: </h3>
                     <p id="description">Descrição: </p>
                     <p id="author">Autor: </p>
-                    <p id="language">Linguagens: </p>
                     <p id="forks">Forks: </p>
                     <p id="date">Última atualização: </p>
+                    <div id="linguagens">
+                        <p id="language">Linguagens</p>
+                        <button id="show-languages" hidden-full-name ="" hidden-card-id="" onclick="showLanguages(event)">&#9654</button>                    </div>
+                    <p class="linguagens-info" hidden></p>
                 </div>
                 <div id="flex-col-dois">
                     <p id="stars">&#11088  </p>
@@ -33,11 +55,6 @@
             </div>
             
         </template>
-
-        <!--Área em que os cards de resultado serão adicionados-->
-        <div id="card-holder">
-
-        </div>
     </body>
     
     <script src="./api-call.js"></script>

@@ -14,7 +14,7 @@ body{
     padding:0 30%;
 }
 
-button{
+.input-btn{
     padding: 2%;
     border: none;
     border-radius: 10px;
@@ -26,11 +26,25 @@ button{
 input{
     font-size: medium;
     padding: 2%;
+    border: none;
+    border-bottom: 1px solid #919191;
     border-radius: 10px;
     background-color: #f1f1f1;
 }
 
-/*        Template          */
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(151, 149, 149);
+    opacity: 1;
+}
+
+/*          Paginacao             */
+
+#paginacao{
+
+}
+
+
+/*        Cards Template          */
 #card{
     display: flex;
     flex-direction: row;
@@ -47,4 +61,26 @@ input{
 
 #flex-col-dois{
     justify-content: flex-end;
+}
+
+#linguagens{
+    width: 45%;
+    padding-left: 0.5%;
+    background-color: #fafafa;
+    border-radius: 10px;
+    border: 1px solid #333;;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+#show-languages{
+    justify-content: center;
+    padding: 0 2%;
+    margin-right: 0;
+    background-color: #333;
+    color: white;
+    border: none;
 }
