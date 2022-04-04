@@ -6,6 +6,7 @@ var internalPage = 0;
 var apiPage = 1;
 var currentRepList
 var searchTerm
+var dataEnd = false
 
 var api = "https://api.github.com/"
 
@@ -62,7 +63,8 @@ function createCards(data){
       clone.getElementById("show-languages").setAttribute('hidden-card-id', i);
 
       cardHolder.appendChild(clone);
-    }else{
+    }else{ //avisando que não tem mais repositorios para olhar
+      dataEnd = true;
       break;
     }
   }
@@ -89,14 +91,27 @@ function showPagination(totalQuantity){
   document.getElementById("quantidade").textContent += min + " - " + max + " de " + totalQuantity;
 }
 
-//O que acontece ao clicar no botão de ir para a próxima página
+//O que acontece ao clicar no botão de ir para a próxima página é que vai ser checado se existem mais repositórios na lista,
+//Se tiverem vai ser checado se aquele é o final da pagina da api. Caso não seja, prosseguir normalmente pra proxima pagina interna,
+//Caso seja, fazer uma nova chamada da api com a segunda página.
 function nextPage(){
-  internalPage += 1;
-  cleanCards();
-  createCards(currentRepList);
-  cleanPagination();
-  showPagination(currentRepList.total_count);
+  if(dataEnd == false){
+    if(internalPage<9){
+      internalPage += 1;
+      cleanCards();
+      createCards(currentRepList);
+      cleanPagination();
+      showPagination(currentRepList.total_count);
+    }else {
+      apiPage += 1;
+      internalPage = 0;
+      cleanCards();
+      cleanPagination();
+      getRepositoryList(searchTerm);
+    }
+  }  
 }
+//Já para o da página anterior, é preciso impedir que a pagina interna fique menor que 0 e a da api fique menor que 1
 function lastPage(){
   //para impedir que vá abaixo da primeira pagina
   if(internalPage>0){
@@ -106,6 +121,7 @@ function lastPage(){
     cleanPagination();
     showPagination(currentRepList.total_count);
   }else if(apiPage>1){ //nesse caso estou na pagina interna 0 mas não é a primeira da api, entao faço uma nova chamada para a api, começando da ultima pagina interna possivel
+    apiPage -= 1;
     internalPage = 9;
     cleanCards();
     cleanPagination();
