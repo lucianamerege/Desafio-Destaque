@@ -10,6 +10,7 @@ var dataEnd = false
 
 var api = "https://api.github.com/"
 
+//Event listener, acontece quando o botão de pesquisa no form é apertado
 form.addEventListener('submit', function(e){
 
   internalPage = 0;
@@ -115,18 +116,19 @@ function nextPage(){
 function lastPage(){
   //para impedir que vá abaixo da primeira pagina
   if(internalPage>0){
+    dataEnd = false;
     internalPage -= 1;
     cleanCards();
     createCards(currentRepList);
     cleanPagination();
     showPagination(currentRepList.total_count);
   }else if(apiPage>1){ //nesse caso estou na pagina interna 0 mas não é a primeira da api, entao faço uma nova chamada para a api, começando da ultima pagina interna possivel
+    dataEnd = false;
     apiPage -= 1;
     internalPage = 9;
     cleanCards();
     cleanPagination();
     getRepositoryList(searchTerm);
-
   }
 }
 
