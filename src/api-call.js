@@ -1,23 +1,24 @@
 var form = document.getElementById("form");
 var search = document.getElementById("searchTerm");
 var cardHolder = document.getElementById("card-holder");
-var pagination = document.getElementById("paginacao");
-var page = 1;
-var pageQuant;
+var pagination = document.getElementById("paginacao-container");
+var internalPage = 0;
+var apiPage = 1;
+var currentRepList
+var searchTerm
 
 var api = "https://api.github.com/"
 
 form.addEventListener('submit', function(e){
 
-  e.preventDefault()
-  var searchTerm = search.value;
+  internalPage = 0;
+  apiPage = 1;
+  e.preventDefault();
+  searchTerm = search.value;
 
   //Limpar todos os cards da tela
   cleanCards();
-
-
-  //cleanPagination()
-
+  cleanPagination();
 
   //Removendo espaços em branco da string
   searchTerm = searchTerm.split(' ').join('');
@@ -27,12 +28,13 @@ form.addEventListener('submit', function(e){
 
 //Função de chamada da API Search
 function getRepositoryList(searchTerm) {
-  fetch(api + "search/repositories?q="+searchTerm+"&sort=stars&order=desc")
+  fetch(api + "search/repositories?q="+searchTerm+"&sort=stars&order=desc&per_page=100&page="+apiPage)
   .then((result) => result.json())
   .then((data) => {
-    createCards(data);
+    currentRepList = data;
     //Para mostrar quantos resultados teve a pesquisa e a paginação
-    //showPagination(data.total_count);
+    showPagination(currentRepList.total_count);
+    createCards(currentRepList);    
   })
 
 }
@@ -43,24 +45,27 @@ function createCards(data){
   template = document.querySelector('#card-template');
 
   //Agora todos os resultados serão inclusos em um clone do template e adicionados ao "Card Holder"
-  for(var i = 0; i<10; i++){
-    //Deixando a data de atualizacao mais legível
-    var atualizacao = data.items[i].updated_at.split("T");
+  for(var i = internalPage*10; i<internalPage*10+10; i++){
+    if(data.items[i]){
+      //Deixando a data de atualizacao mais legível
+      var atualizacao = data.items[i].updated_at.split("T");
 
-    clone = template.content.cloneNode(true);
-    clone.getElementById("name").textContent += data.items[i].name;
-    clone.getElementById("description").textContent += data.items[i].description;
-    clone.getElementById("author").textContent += data.items[i].owner.login;
-    clone.getElementById("forks").textContent += data.items[i].forks_count;
-    clone.getElementById("stars").textContent += data.items[i].stargazers_count;
-    clone.getElementById("date").textContent += atualizacao[0];
-    //Alterando esse atributo customizado, vou acessa-lo mais tarde para descobrir qual card chamou a função que mostra as linguagens
-    clone.getElementById("show-languages").setAttribute('hidden-full-name', data.items[i].full_name);
-    clone.getElementById("show-languages").setAttribute('hidden-card-id', i);
+      clone = template.content.cloneNode(true);
+      clone.getElementById("name").textContent += data.items[i].name;
+      clone.getElementById("description").textContent += data.items[i].description;
+      clone.getElementById("author").textContent += data.items[i].owner.login;
+      clone.getElementById("forks").textContent += data.items[i].forks_count;
+      clone.getElementById("stars").textContent += data.items[i].stargazers_count;
+      clone.getElementById("date").textContent += atualizacao[0];
+      //Alterando esse atributo customizado, vou acessa-lo mais tarde para descobrir qual card chamou a função que mostra as linguagens
+      clone.getElementById("show-languages").setAttribute('hidden-full-name', data.items[i].full_name);
+      clone.getElementById("show-languages").setAttribute('hidden-card-id', i);
 
-    cardHolder.appendChild(clone);
+      cardHolder.appendChild(clone);
+    }else{
+      break;
+    }
   }
-  
 }
 
 //Retirar da tela os resultados da pesquisa anterior
@@ -70,26 +75,43 @@ function cleanCards(){
   }
 }
 function cleanPagination(){
-  while (pagination.lastChild) {
-    pagination.removeChild(pagination.lastChild);
-  }
+  pagination.setAttribute("hidden", "hidden");
+  document.getElementById("quantidade").textContent = ""
 }
 
-//Quantos resultados vieram da busca
-function showPagination(quantity){
-  var template, clone;
+//Quantos resultados vieram da busca + Botões da paginação aparecem
+function showPagination(totalQuantity){
+  var max, min;
+  min = (internalPage*10)+1;
+  max = (internalPage*10)+10;
 
-  template = document.querySelector('#pagina-template');
-  clone = template.content.cloneNode(true);
-  clone.getElementById("quantidade").textContent += quantity;
-  
-  if(quantity%5 == 0){
-    pageQuant = quantity/5;
-  }else{
-    pageQuant = quantity+1;
+  pagination.removeAttribute('hidden');
+  document.getElementById("quantidade").textContent += min + " - " + max + " de " + totalQuantity;
+}
+
+//O que acontece ao clicar no botão de ir para a próxima página
+function nextPage(){
+  internalPage += 1;
+  cleanCards();
+  createCards(currentRepList);
+  cleanPagination();
+  showPagination(currentRepList.total_count);
+}
+function lastPage(){
+  //para impedir que vá abaixo da primeira pagina
+  if(internalPage>0){
+    internalPage -= 1;
+    cleanCards();
+    createCards(currentRepList);
+    cleanPagination();
+    showPagination(currentRepList.total_count);
+  }else if(apiPage>1){ //nesse caso estou na pagina interna 0 mas não é a primeira da api, entao faço uma nova chamada para a api, começando da ultima pagina interna possivel
+    internalPage = 9;
+    cleanCards();
+    cleanPagination();
+    getRepositoryList(searchTerm);
+
   }
-
-  pagination.appendChild(clone);
 }
 
 //Essa função faz uma segunda chamada da API, para pegar apenas as linguagens do repositorio selecionado.

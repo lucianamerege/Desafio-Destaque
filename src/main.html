@@ -14,26 +14,19 @@
                     <button class="input-btn">Pesquisar Repositórios</button>
                 </div>
             </form>
-        </div>
-
-        <!--Área em que os elementos da paginação serão adicionados-->
-        <div id="area-paginacao">
-
+            <div id="paginacao-container" hidden>
+                <div id = "paginacao">
+                    <button class="page-btn" onclick="lastPage()"> < </button>
+                    <p id="quantidade">Resultados da busca: </p>
+                    <button class="page-btn" onclick="nextPage()"> > </button>
+                </div>
+            </div>
         </div>
 
         <!--Área em que os cards de resultado serão adicionados-->
         <div id="card-holder">
 
         </div>
-
-
-        <!--Template de Paginação-->
-        <template id="pagina-template">
-            <div id = "paginacao">
-                <h2 id="quantidade">Resultados da busca: </h2>
-                <button></button>
-            </div>
-        </template>
 
         <!--Template para os resultados da pesquisa-->
         <template id= "card-template">

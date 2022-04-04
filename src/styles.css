@@ -21,6 +21,7 @@ body{
     padding:0 30%;
 }
 
+
 .input-btn{
     padding: 2%;
     border: none;
@@ -47,9 +48,23 @@ input{
 /*          Paginacao             */
 
 #paginacao{
+    padding-top: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
-
+.page-btn{
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background-color: #333;
+    color: white;
+    font-size: medium;
+}
+#quantidade{
+    margin: 0 30px;
+}
 
 /*        Cards Template          */
 #card{
@@ -102,3 +117,10 @@ input{
     border-radius: 8px;
     border-bottom: 1px solid #ddd;
 }
+
+/*           Mudanças para mobile              */
+@media screen and (max-width: 600px) {
+    .form-group{
+        padding: 0 10%;
+    }
+  }
