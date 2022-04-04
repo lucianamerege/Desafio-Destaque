@@ -1,11 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap'); /*import da fonte que eu escolhi*/
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 
 body{
-    margin-top: 30px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 /*          Form             */
+.form-container{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    border-bottom: 2px solid #ddd;
+    padding: 2% 0;
+}
 .form-group{
     display: flex;
     row-gap: 20px;
@@ -27,7 +34,7 @@ input{
     font-size: medium;
     padding: 2%;
     border: none;
-    border-bottom: 1px solid #919191;
+    border-bottom: 1px solid #ddd;
     border-radius: 10px;
     background-color: #f1f1f1;
 }
@@ -51,16 +58,19 @@ input{
     flex-wrap: nowrap;
     background-color: #f1f1f1;
     border-radius: 10px;
-    border-bottom: 2px solid #919191;
+    border-bottom: 2px solid #ddd;
     padding: 2% 2% 2% 4%;
     margin:2% 2% 0%; /*cima, dir e esq, baixo*/
 }
 #flex-col-um{
-    width: 90%;
+    width: 80%;
 }
 
 #flex-col-dois{
+    width: 20%;
+    display: flex;
     justify-content: flex-end;
+    align-items: center;
 }
 
 #linguagens{
@@ -68,7 +78,7 @@ input{
     padding-left: 0.5%;
     background-color: #fafafa;
     border-radius: 10px;
-    border: 1px solid #333;;
+    border-bottom: 1px solid #ddd;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -83,4 +93,12 @@ input{
     background-color: #333;
     color: white;
     border: none;
+}
+
+#stars{
+    background-color: #fafafa;
+    padding: 10px;
+    width: auto;
+    border-radius: 8px;
+    border-bottom: 1px solid #ddd;
 }

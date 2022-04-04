@@ -31,11 +31,8 @@ function getRepositoryList(searchTerm) {
   .then((result) => result.json())
   .then((data) => {
     createCards(data);
-
     //Para mostrar quantos resultados teve a pesquisa e a paginação
     //showPagination(data.total_count);
-
-    console.log(data);
   })
 
 }
@@ -46,7 +43,7 @@ function createCards(data){
   template = document.querySelector('#card-template');
 
   //Agora todos os resultados serão inclusos em um clone do template e adicionados ao "Card Holder"
-  for(var i = 0; i<5; i++){
+  for(var i = 0; i<10; i++){
     //Deixando a data de atualizacao mais legível
     var atualizacao = data.items[i].updated_at.split("T");
 
@@ -57,7 +54,7 @@ function createCards(data){
     clone.getElementById("forks").textContent += data.items[i].forks_count;
     clone.getElementById("stars").textContent += data.items[i].stargazers_count;
     clone.getElementById("date").textContent += atualizacao[0];
-    //Alterando esse atributo customizado, vou poder acessa-lo mais tarde para descobrir qual card chamou a função que mostra as linguagens
+    //Alterando esse atributo customizado, vou acessa-lo mais tarde para descobrir qual card chamou a função que mostra as linguagens
     clone.getElementById("show-languages").setAttribute('hidden-full-name', data.items[i].full_name);
     clone.getElementById("show-languages").setAttribute('hidden-card-id', i);
 
