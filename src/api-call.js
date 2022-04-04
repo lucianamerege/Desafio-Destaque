@@ -1,6 +1,6 @@
 var form = document.getElementById("form")
 var search = document.getElementById("searchTerm")
-var cardHolder = document.getElementById("results")
+var cardHolder = document.getElementById("card-holder")
 
 form.addEventListener('submit', function(e){
 
@@ -16,6 +16,7 @@ form.addEventListener('submit', function(e){
   getRepositoryList(searchTerm);
 })
 
+//Função de chamada da API Search
 function getRepositoryList(searchTerm) {
   fetch("https://api.github.com/search/repositories?q="+searchTerm+"&sort=stars&order=desc")
   .then((result) => result.json())
@@ -31,7 +32,8 @@ function createCards(data){
 
   template = document.querySelector('#card-template');
 
-  for(var i = 0; i<10; i++){
+  //Agora todos os resultados serão inclusos em um clone do template e adicionados ao "Card Holder"
+  for(var i = 0; i<5; i++){
     //Deixando a data de atualizacao mais legível
     var atualizacao = data.items[i].updated_at.split("T")
 
@@ -49,6 +51,7 @@ function createCards(data){
   
 }
 
+//Retirar da tela os resultados da pesquisa anterior
 function cleanCards(){
   while (cardHolder.lastChild) {
     cardHolder.removeChild(cardHolder.lastChild);

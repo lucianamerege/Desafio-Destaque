@@ -6,16 +6,17 @@
         <title>Desafio - Destaque</title>
     </head>
     <body>
-        <!---->
+        <!--Área de Input-->
         <div class="form-container">
             <form id="form">
                 <div class="form-group">
-                    <input type="text" id="searchTerm"/>
+                    <input type="text" id="searchTerm" placeholder="Brasil">
                     <button class="btn">Pesquisar Repositórios</button>
                 </div>
             </form>
         </div>
 
+        <!--Template para os resultados da pesquisa-->
         <template id= "card-template">
             <div id="card">
                 <div id="flex-col-um">
@@ -27,13 +28,14 @@
                     <p id="date">Última atualização: </p>
                 </div>
                 <div id="flex-col-dois">
-                    <p id="stars">&#11088 : </p>
+                    <p id="stars">&#11088  </p>
                 </div>
             </div>
             
         </template>
 
-        <div id="results">
+        <!--Área em que os cards de resultado serão adicionados-->
+        <div id="card-holder">
 
         </div>
     </body>
