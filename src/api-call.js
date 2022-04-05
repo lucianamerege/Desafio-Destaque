@@ -22,9 +22,6 @@ form.addEventListener('submit', function(e){
   cleanCards();
   cleanPagination();
 
-  //Removendo espaços em branco da string
-  searchTerm = searchTerm.split(' ').join('');
-
   getRepositoryList(searchTerm);
 })
 
