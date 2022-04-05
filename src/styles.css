@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 
+:root {
+    --bottom-line: #ddd;
+    --git: #333;
+}
+
 body{
     font-family: 'Source Sans Pro', sans-serif;
 }
@@ -10,33 +15,35 @@ body{
     position: sticky;
     top: 0;
     background-color: #fff;
-    border-bottom: 2px solid #ddd;
-    padding: 2% 0;
+    border-bottom: 1px solid  var(--bottom-line);
+    padding: 1% 0;
 }
 .form-group{
+    width: 100%;
     display: flex;
-    row-gap: 20px;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
-    padding:0 30%;
+    column-gap: 30px;
 }
 
-
 .input-btn{
-    padding: 2%;
+    width: 20%;
+    cursor: pointer;
+    padding: 1% 2%;
     border: none;
-    border-radius: 10px;
-    background-color: #333;
+    border-radius: 5px;
+    background-color: var(--git);
     color: white;
     font-size: medium;
 }
 
 input{
+    width: 20%;
     font-size: medium;
-    padding: 2%;
+    padding: 1% 2%;
     border: none;
-    border-bottom: 1px solid #ddd;
-    border-radius: 10px;
+    border-bottom: 1px solid var(--bottom-line);
+    border-radius: 5px;
     background-color: #f1f1f1;
 }
 
@@ -48,17 +55,20 @@ input{
 /*          Paginacao             */
 
 #paginacao{
-    padding-top: 2%;
+    border-top: 1px solid  var(--bottom-line);
+    margin-top: 2%;
+    padding: 2% 0;
     display: flex;
     justify-content: center;
     align-items: center;
 
 }
 .page-btn{
+    cursor: pointer;
     padding: 15px;
     border: none;
-    border-radius: 10px;
-    background-color: #333;
+    border-radius: 5px;
+    background-color: var(--git);
     color: white;
     font-size: medium;
 }
@@ -72,11 +82,12 @@ input{
     flex-direction: row;
     flex-wrap: nowrap;
     background-color: #f1f1f1;
-    border-radius: 10px;
-    border-bottom: 2px solid #ddd;
+    border-radius: 5px;
+    border-bottom: 2px solid  var(--bottom-line);
     padding: 2% 2% 2% 4%;
     margin:2% 2% 0%; /*cima, dir e esq, baixo*/
 }
+
 #flex-col-um{
     width: 80%;
 }
@@ -93,7 +104,7 @@ input{
     padding-left: 0.5%;
     background-color: #fafafa;
     border-radius: 10px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid  var(--bottom-line);
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -102,10 +113,11 @@ input{
 }
 
 #show-languages{
+    cursor: pointer;
     justify-content: center;
     padding: 0 2%;
     margin-right: 0;
-    background-color: #333;
+    background-color: var(--git);
     color: white;
     border: none;
 }
@@ -115,12 +127,19 @@ input{
     padding: 10px;
     width: auto;
     border-radius: 8px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid  var(--bottom-line);
 }
 
-/*           Mudanças para mobile              */
-@media screen and (max-width: 600px) {
-    .form-group{
-        padding: 0 10%;
-    }
-  }
+#name{
+    color: black;
+    font-size:x-large;
+}
+
+#description{
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    max-height: 64px;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

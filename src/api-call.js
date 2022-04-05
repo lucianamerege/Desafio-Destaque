@@ -54,6 +54,7 @@ function createCards(data){
 
       clone = template.content.cloneNode(true);
       clone.getElementById("name").textContent += data.items[i].name;
+      clone.getElementById("name").setAttribute("href", data.items[i].html_url);
       clone.getElementById("description").textContent += data.items[i].description;
       clone.getElementById("author").textContent += data.items[i].owner.login;
       clone.getElementById("forks").textContent += data.items[i].forks_count;
@@ -61,7 +62,7 @@ function createCards(data){
       clone.getElementById("date").textContent += atualizacao[0];
       //Alterando esse atributo customizado, vou acessa-lo mais tarde para descobrir qual card chamou a função que mostra as linguagens
       clone.getElementById("show-languages").setAttribute('hidden-full-name', data.items[i].full_name);
-      clone.getElementById("show-languages").setAttribute('hidden-card-id', i);
+      clone.getElementById("show-languages").setAttribute('hidden-card-id', i-(10*internalPage));
 
       cardHolder.appendChild(clone);
     }else{ //avisando que não tem mais repositorios para olhar
@@ -85,8 +86,8 @@ function cleanPagination(){
 //Quantos resultados vieram da busca + Botões da paginação aparecem
 function showPagination(totalQuantity){
   var max, min;
-  min = (internalPage*10)+1;
-  max = (internalPage*10)+10;
+  min = (internalPage*10)+1+((apiPage-1)*100);
+  max = (internalPage*10)+10+((apiPage-1)*100);
 
   pagination.removeAttribute('hidden');
   document.getElementById("quantidade").textContent += min + " - " + max + " de " + totalQuantity;
@@ -155,8 +156,8 @@ function showLanguages(e){
 }
 
 function alertLanguages(languagesArray, cardId){
-  var languageP = cardHolder.children[cardId].getElementsByClassName("linguagens-info")
-  languageP[0].textContent = languagesArray;
+  var languageP = cardHolder.children[cardId].getElementsByClassName("linguagens-info");
+  languageP[0].textContent = "Linguagens: " + languagesArray;
   languageP[0].removeAttribute('hidden');
 }
 function alertNoLanguages(cardId){

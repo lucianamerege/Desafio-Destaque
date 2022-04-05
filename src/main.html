@@ -10,17 +10,10 @@
         <div class="form-container">
             <form id="form">
                 <div class="form-group">
-                    <input type="text" id="searchTerm" placeholder="Brasil" required>
+                    <input type="text" id="searchTerm" placeholder="Dogs" required>
                     <button class="input-btn">Pesquisar Repositórios</button>
                 </div>
             </form>
-            <div id="paginacao-container" hidden>
-                <div id = "paginacao">
-                    <button class="page-btn" onclick="lastPage()"> < </button>
-                    <p id="quantidade">Resultados da busca: </p>
-                    <button class="page-btn" onclick="nextPage()"> > </button>
-                </div>
-            </div>
         </div>
 
         <!--Área em que os cards de resultado serão adicionados-->
@@ -28,17 +21,26 @@
 
         </div>
 
+        <!-- Área em que aparece a paginação -->
+        <div id="paginacao-container" hidden>
+            <div id = "paginacao">
+                <button class="page-btn" onclick="lastPage()"> < </button>
+                <p id="quantidade">Resultados da busca: </p>
+                <button class="page-btn" onclick="nextPage()"> > </button>
+            </div>
+        </div>
+
         <!--Template para os resultados da pesquisa-->
         <template id= "card-template">
             <div id="card">
                 <div id="flex-col-um">
-                    <h3 id="name">Nome: </h3>
+                    <a href="" id="name" target="_blank">Nome: </a>
                     <p id="description">Descrição: </p>
                     <p id="author">Autor: </p>
                     <p id="forks">Forks: </p>
                     <p id="date">Última atualização: </p>
                     <div id="linguagens">
-                        <p id="language">Linguagens</p>
+                        <p id="language">Mostrar linguagens</p>
                         <button id="show-languages" hidden-full-name ="" hidden-card-id="" onclick="showLanguages(event)">&#9654</button>                    </div>
                     <p class="linguagens-info" hidden></p>
                 </div>
