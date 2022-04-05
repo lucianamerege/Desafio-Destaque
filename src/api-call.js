@@ -31,7 +31,19 @@ form.addEventListener('submit', function(e){
 //Função de chamada da API Search
 function getRepositoryList(searchTerm) {
   fetch(api + "search/repositories?q="+searchTerm+"&sort=stars&order=desc&per_page=100&page="+apiPage)
-  .then((result) => result.json())
+  .then((result) => {
+    console.log(result.status);
+    if(result.status == 200){
+      return result.json();
+    }else if(result.status == 403){
+      alert("Limite de uso da API excedido.");
+      return result.json();
+    }else{
+      alert("Algo deu errado.");
+      return result.json();
+    }
+    
+  })
   .then((data) => {
     currentRepList = data;
     //Para mostrar quantos resultados teve a pesquisa e a paginação
@@ -144,7 +156,19 @@ function showLanguages(e){
   e.target.textContent = "▼";
 
   fetch(api+"repos/"+fullName+"/languages")
-  .then((result) => result.json())
+  .then((result) => {
+    console.log(result.status);
+    if(result.status == 200){
+      return result.json();
+    }else if(result.status == 403){
+      alert("Limite de uso da API excedido.");
+      return result.json();
+    }else{
+      alert("Algo deu errado.");
+      return result.json();
+    }
+    
+  })
   .then((data) => {
     var languagesArray = Object.keys(data);
     if(languagesArray.length == 0){
